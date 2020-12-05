@@ -1,0 +1,16 @@
+{
+  "name": "@plone-collective/voltodemo",
+  "version": "0.1.0",
+  "description": "voltodemo: Volto add-on",
+  "main": "src/index.js",
+  "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react"
+  ],
+  "dependencies": {
+    "papaparse": "5.3.0"
+  }
+}
