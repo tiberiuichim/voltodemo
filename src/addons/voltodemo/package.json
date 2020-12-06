@@ -11,6 +11,8 @@
     "react"
   ],
   "dependencies": {
+    "@eeacms/volto-blocks-form": "eea/volto-blocks-form",
+    "@eeacms/volto-object-widget": "eea/volto-object-widget",
     "papaparse": "5.3.0"
   }
 }

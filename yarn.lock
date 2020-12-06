@@ -1275,6 +1275,25 @@
   dependencies:
     react-color "~2.18.1"
 
+"@eeacms/volto-blocks-form@^1.0.0":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@eeacms/volto-blocks-form/-/volto-blocks-form-1.0.3.tgz#a47b5c04a1d45c8a6eee11c2ed29ee82255fe7af"
+  integrity sha512-4CdA38woaAmJdNgZHBIBv+ygi/uC9yTY2WcHVtTLhH9YF5zX9/32hO7+07PJOiwXGu38WF7y9ii97eDMepJgSQ==
+  dependencies:
+    react-beautiful-dnd "13.0.0"
+
+"@eeacms/volto-blocks-form@eea/volto-blocks-form":
+  version "1.0.3"
+  resolved "https://codeload.github.com/eea/volto-blocks-form/tar.gz/78d8fd37b1548c26a921fc2059a67339ca059fa3"
+  dependencies:
+    react-beautiful-dnd "13.0.0"
+
+"@eeacms/volto-object-widget@eea/volto-object-widget":
+  version "1.0.3"
+  resolved "https://codeload.github.com/eea/volto-object-widget/tar.gz/65381d93145c3e71c15874194d0afaa94711917d"
+  dependencies:
+    "@eeacms/volto-blocks-form" "^1.0.0"
+
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"

@@ -3,6 +3,7 @@ import tableSVG from '@plone/volto/icons/table.svg';
 import { ObjectBrowserWidgetMode } from '@plone/volto/components/manage/Widgets/ObjectBrowserWidget';
 import { DataTableView, DataTableEdit } from './DataTable';
 import { rawdata } from './reducers';
+import { TextAlign } from './widgets';
 
 export const demoContent = (config) => {
   return config;
@@ -11,6 +12,9 @@ export const demoContent = (config) => {
 export default (config) => {
   if (!config.widgets.widget.pick_object)
     config.widgets.widget.pick_object = ObjectBrowserWidgetMode('link');
+
+  if (!config.widgets.widget.text_align)
+      config.widgets.widget.text_align = TextAlign;
 
   config.blocks.blocksConfig.dataTable = {
     id: 'dataTable',

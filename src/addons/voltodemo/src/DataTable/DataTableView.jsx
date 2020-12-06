@@ -13,25 +13,34 @@ const format = (data) => {
   };
 };
 
-export const DataTableView = (props) => {
-  const { file_data } = props;
-
-  const fields = file_data?.meta?.fields || [];
+const DataTableView = ({ file_data, data }) => {
+  const columns =
+    data.columns?.length > 0
+      ? data.columns
+      : file_data?.meta?.fields?.map((n) => ({
+          column: n,
+        }));
 
   return file_data ? (
-    <Table {...format(props.data)}>
+    <Table {...format(data)}>
       <Table.Header>
         <Table.Row>
-          {fields.map((f) => (
-            <Table.Cell key={f}>{f}</Table.Cell>
+          {columns.map((col, i) => (
+            <Table.HeaderCell key={i} textAlign={col.textAlign}>
+              {col.title || col.column}
+            </Table.HeaderCell>
           ))}
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {file_data.data.map((o, i) => (
           <Table.Row key={i}>
-            {fields.map((f) => (
-              <Table.Cell>{o[f]}</Table.Cell>
+            {columns.map((col, y) => (
+              <Table.Cell textAlign={col.textAlign}>
+                {col.textTemplate
+                  ? col.textTemplate.replace('{}', o[col.column])
+                  : o[col.column]}
+              </Table.Cell>
             ))}
           </Table.Row>
         ))}

@@ -20,6 +20,8 @@
   ],
   "addons": [
     "@plone-collective/voltodemo",
+    "@eeacms/volto-blocks-form",
+    "@eeacms/volto-object-widget",
     "@eeacms/volto-block-style:installDemoStyles"
   ],
   "jest": {

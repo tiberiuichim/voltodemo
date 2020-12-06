@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose } from 'redux';
 import { Segment, Form } from 'semantic-ui-react';
 import {
   SidebarPortal,
@@ -9,66 +10,50 @@ import {
 import tableSVG from '@plone/volto/icons/table.svg';
 import { TableSchema } from './schema';
 
+import {
+  withBlockDataSource,
+  withFileData,
+} from '@plone-collective/voltodemo/hocs';
+
 import DataTableView from './DataTableView';
 
 import './datatable-edit.less';
 
 const DataTableEdit = (props) => {
-  const { selected, onChangeBlock, block, data } = props;
-  console.log(props);
+  const { selected, onChangeBlock, block, data, file_data } = props;
   const schema = TableSchema(props);
+  const choices = (file_data?.meta?.fields || []).sort().map((n) => [n, n]);
+  schema.properties.columns.schema.properties.column.choices = choices;
 
   return (
-    <div className="dataTable-edit">
+    // <> represents a React Fragment see https://reactjs.org/docs/fragments.html#short-syntax for more details
+    <>
       <SidebarPortal selected={selected}>
-        {!data.file_path?.length ? (
-          <Segment.Group raised>
-            <header className="header pulled">
-              <h2>Data table</h2>
-            </header>
-            <Segment className="sidebar-metadata-container" secondary>
-              No file selected
-              <Icon name={tableSVG} size="100px" color="#b8c6c8" />
-            </Segment>
-          </Segment.Group>
-        ) : (
-          <InlineForm
-            schema={schema}
-            title={schema.title}
-            onChangeField={(id, value) => {
-              onChangeBlock(block, {
-                ...data,
-                [id]: value,
-              });
-            }}
-            formData={data}
-          />
-        )}
+        <InlineForm
+          schema={schema}
+          title={schema.title}
+          onChangeField={(id, value) => {
+            onChangeBlock(block, {
+              ...data,
+              [id]: value,
+            });
+          }}
+          formData={data}
+        />
       </SidebarPortal>
-
-      {data.file_path?.length ? (
-        <DataTableView {...props} />
-      ) : (
-        <div className="no-value">
-          <Form>
-            <Icon name={tableSVG} size="100px" color="#b8c6c8" />
-            <Field
-              id="file_path"
-              widget="pick_object"
-              title="Pick a file"
-              value={data.file_path || []}
-              onChange={(id, value) => {
-                onChangeBlock(block, {
-                  ...data,
-                  [id]: value,
-                });
-              }}
-            />
-          </Form>
-        </div>
-      )}
-    </div>
+      <DataTableView {...props} />
+    </>
   );
 };
 
-export default DataTableEdit;
+const getFilePath = ({ data: { file_path } }) => file_path;
+
+export default compose(
+  withFileData(getFilePath),
+  withBlockDataSource({
+    getFilePath,
+    icon: tableSVG,
+    title: 'Data table',
+  }),
+)(DataTableEdit);
+
