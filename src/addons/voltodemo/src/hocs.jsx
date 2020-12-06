@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRawContent } from '@plone-collective/voltodemo/actions';
 import csv from 'papaparse';
 
+import { Segment, Form } from 'semantic-ui-react';
+import { SidebarPortal, Field, Icon } from '@plone/volto/components';
+
 export const withFileData = (getFilePath) => (WrappedComponent) => {
   return (props) => {
     const file_path = getFilePath(props);
