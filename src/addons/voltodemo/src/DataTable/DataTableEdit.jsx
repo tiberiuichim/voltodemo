@@ -1,9 +1,6 @@
 import React from 'react';
-import { Segment, Form } from 'semantic-ui-react';
 import {
   SidebarPortal,
-  Field,
-  Icon,
   InlineForm,
 } from '@plone/volto/components';
 import tableSVG from '@plone/volto/icons/table.svg';
