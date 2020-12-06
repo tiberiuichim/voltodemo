@@ -101,7 +101,7 @@ const ColumnSchema = (props) => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['column', 'title', 'textTemplate', 'textAlign'],
+      fields: ['column', 'title', 'textTemplate', 'textAlign', 'renderer'],
     },
   ],
   properties: {
@@ -115,14 +115,18 @@ const ColumnSchema = (props) => ({
     textAlign: {
       title: 'Align',
       widget: 'text_align',
-      choices: [
-        ['left', 'left'],
-        ['center', 'center'],
-        ['right', 'right'],
-      ],
+      // choices: [
+      //   ['left', 'left'],
+      //   ['center', 'center'],
+      //   ['right', 'right'],
+      // ],
     },
     column: {
       title: 'Data column',
+      choices: [],
+    },
+    renderer: {
+      title: 'Format',
       choices: [],
     },
   },

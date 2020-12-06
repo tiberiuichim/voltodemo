@@ -5,6 +5,9 @@ import { DataTableView, DataTableEdit } from './DataTable';
 import { rawdata } from './reducers';
 import { TextAlign } from './widgets';
 
+import { ProgressCellRenderer, TextTemplateRenderer } from './CellRenderer';
+
+
 export const demoContent = (config) => {
   return config;
 };
@@ -18,19 +21,33 @@ export default (config) => {
 
   config.blocks.blocksConfig.dataTable = {
     id: 'dataTable',
-    title: 'Demo Table',
+    title: 'Data Table',
     icon: tableSVG,
     group: 'common',
     view: DataTableView,
     edit: DataTableEdit,
     restricted: false,
-    mostUsed: true,
+    mostUsed: false,
     sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
     },
+    cellRenderers: {
+      textTemplate: {
+        id: 'textTemplate',
+        title: 'Text Template',
+        view: TextTemplateRenderer,
+        schemaExtender: TextTemplateRenderer.schemaExtender,
+      },
+      progress: {
+        id: 'progress',
+        title: 'Progress',
+        view: ProgressCellRenderer,
+      },
+    },
   };
+
   config.addonReducers.rawdata = rawdata;
   return config;
 };
