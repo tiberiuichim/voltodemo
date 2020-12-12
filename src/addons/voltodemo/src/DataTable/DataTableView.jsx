@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import { withFileData } from './../hocs';
+import { blocks } from '~/config';
 
 const format = (data) => {
   return {
@@ -11,6 +12,15 @@ const format = (data) => {
     inverted: data.inverted,
     striped: data.striped,
   };
+};
+
+const Cell = ({ column, value }) => {
+  const { renderer } = column;
+
+  const Render = renderer
+    ? blocks.blocksConfig.dataTable.cellRenderers[renderer].view
+    : null;
+  return Render ? <Render column={column} value={value} /> : value;
 };
 
 const DataTableView = ({ file_data, data }) => {
@@ -36,10 +46,8 @@ const DataTableView = ({ file_data, data }) => {
         {file_data.data.map((o, i) => (
           <Table.Row key={i}>
             {columns.map((col, y) => (
-              <Table.Cell textAlign={col.textAlign}>
-                {col.textTemplate
-                  ? col.textTemplate.replace('{}', o[col.column])
-                  : o[col.column]}
+              <Table.Cell textAlign={col.textAlign} key={`${y}-${i}`}>
+                <Cell value={o[col.column] ?? ''} column={col} />
               </Table.Cell>
             ))}
           </Table.Row>
